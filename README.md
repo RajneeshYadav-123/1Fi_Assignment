@@ -40,16 +40,6 @@ Here's a quick look at the technologies I used to build this:
 
 ---
 
-## Architecture
-
-Here is how the different pieces of the application communicate with each other:
-
-```mermaid
-graph TD
-    Client[Internet / User] --> VercelFront[Vercel Frontend: React + Vite]
-    VercelFront -- REST API --> VercelBack[Vercel Backend: Node + Express]
-    VercelBack -- Mongoose --> MongoDB[(MongoDB Atlas)]
-```
 
 The React frontend talks to the Express backend using standard HTTP REST API calls. The backend then uses Mongoose to handle all the interactions with the MongoDB Atlas database.
 
@@ -89,28 +79,6 @@ If you want to explore the code, here's a high-level view of how the project is 
 │
 └── package.json
 ```
-
----
-
-## Database Schema
-
-I'm using a single `Product` collection in MongoDB to keep things simple and efficient.
-
-### Product Collection
-
-| Field | Type | Description |
-| :--- | :--- | :--- |
-| `name` | String | The name of the product |
-| `slug` | String | A unique, URL-friendly identifier |
-| `brand` | String | The brand of the product |
-| `description` | String | A detailed description |
-| `mrp` | Number | The maximum retail price |
-| `price` | Number | The actual selling price |
-| `images` | Array | A list of URLs for the product images |
-| `variants` | Array | Available product options (like Color, Storage) |
-| `emiPlans` | Array | The different EMI plans available for the product |
-
-**Note:** I decided to embed the variants and EMI plans directly inside the product document. This makes it really straightforward to get all the information needed for a product details page in just a single API request, rather than making multiple calls.
 
 ---
 
@@ -234,15 +202,3 @@ I've deployed both parts of this project using Vercel. It's split into two separ
 
 ---
 
-## Future Improvements
-
-If I had more time, here are a few things I'd love to add or improve:
-
-- [ ] Implement user authentication and authorization so users can have accounts.
-- [ ] Integrate a real payment gateway, like Stripe or Razorpay, for the checkout flow.
-- [ ] Build an admin dashboard to easily manage the product catalog and inventory.
-- [ ] Add order management capabilities and a user order history page.
-- [ ] Write comprehensive unit and integration tests to ensure reliability.
-- [ ] Improve API request validation and overall error handling.
-- [ ] Set up caching to serve frequently requested product data faster.
-- [ ] Implement production monitoring and more structured logging.
