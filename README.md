@@ -1,42 +1,60 @@
-# 1Fi SDE1 Assignment
+# 1Fi Assignment
 
-Live Demo: [ADD DEPLOYED URL]
+Live Demo: [https://1fi-rajneesh.vercel.app/]((https://1fi-rajneesh.vercel.app/))
 
-Demo Video: [ADD GOOGLE DRIVE/YOUTUBE URL]
+Demo Video: [https://drive.google.com/file/d/1OhvFdN7iF0ynwGnM2wA9QCxUFU4J4Wxv/view?usp=sharing](https://drive.google.com/file/d/1OhvFdN7iF0ynwGnM2wA9QCxUFU4J4Wxv/view?usp=sharing)
 
-GitHub: [ADD GITHUB URL]
+GitHub: [https://github.com/RajneeshYadav-123/1Fi_Assignment](https://github.com/RajneeshYadav-123/1Fi_Assignment)
+
+Backend API: [https://frontend-ten-ochre-72.vercel.app/api/products](https://frontend-ten-ochre-72.vercel.app/api/products)
 
 ## Project Overview
-This project is a complete full-stack e-commerce-style product page that displays smartphones with multiple EMI plans backed by mutual funds. It dynamically retrieves product information, variants, and EMI plans from a MongoDB database through an Express API and presents them using a React frontend.
+
+This project is a complete full-stack e-commerce-style product page that displays smartphones with multiple EMI plans backed by mutual funds. It dynamically retrieves product information, variants, and EMI plans from a MongoDB database through a Node.js and Express REST API and presents them using a React frontend.
+
+The frontend and backend are both deployed on Vercel, while MongoDB Atlas is used as the database.
 
 ## Features
-- Dynamic product listing and details pages.
-- Real-time data fetching from MongoDB.
-- Variant selector (e.g., Color, Storage).
-- Multiple EMI plan options with interest and cashback details.
-- Proceed to checkout flow (demo only).
-- Responsive design for mobile and desktop.
+
+* Dynamic product listing and product details pages.
+* Real-time data fetching from MongoDB.
+* Variant selector for options such as Color and Storage.
+* Multiple EMI plan options with interest and cashback details.
+* Proceed to checkout flow for demonstration purposes.
+* Responsive design for mobile and desktop.
+* REST API for product and health-check operations.
+* Frontend and backend deployed on Vercel.
 
 ## Tech Stack
-**Frontend:** React, Vite, JavaScript, Tailwind CSS, React Router, Axios  
-**Backend:** Node.js, Express.js, JavaScript, Mongoose, dotenv, cors  
-**Database:** MongoDB Atlas  
+
+**Frontend:** React, Vite, JavaScript, Tailwind CSS, React Router, Axios
+
+**Backend:** Node.js, Express.js, JavaScript, Mongoose, dotenv, cors
+
+**Database:** MongoDB Atlas
+
+**Deployment:** Vercel
 
 ## Architecture
-```
+
+```text
 React Frontend
       |
       | HTTP/REST API
+      v
+Vercel
+      |
       v
 Node.js + Express Backend
       |
       | Mongoose
       v
-MongoDB
+MongoDB Atlas
 ```
 
 ## Folder Structure
-```
+
+```text
 1fi-emi-store/
 │
 ├── client/                 # Frontend React Application
@@ -66,32 +84,48 @@ MongoDB
 │
 ├── README.md
 ├── .gitignore
-└── package.json            # Root configuration for concurrent execution
+└── package.json            # Root configuration
 ```
 
 ## MongoDB Schema
+
 This application uses Mongoose to interact with MongoDB. The main entity is the `Product` schema.
 
-**Product Schema:**
-- `name` (String)
-- `slug` (String, Unique)
-- `brand` (String)
-- `description` (String)
-- `mrp` (Number)
-- `price` (Number)
-- `images` (Array of Strings)
-- `variants` (Subdocument Array)
-  - `name`, `type`, `value`, `available`
-- `emiPlans` (Subdocument Array)
-  - `monthlyAmount`, `tenure`, `interestRate`, `cashback`, `label`, `isPopular`, `enabled`
+### Product Schema
 
-MongoDB was selected due to its flexible schema design, allowing variants and EMI plans to be easily embedded within a product document without requiring complex relational joins.
+* `name` (String)
+* `slug` (String, Unique)
+* `brand` (String)
+* `description` (String)
+* `mrp` (Number)
+* `price` (Number)
+* `images` (Array of Strings)
+* `variants` (Subdocument Array)
+
+  * `name`
+  * `type`
+  * `value`
+  * `available`
+* `emiPlans` (Subdocument Array)
+
+  * `monthlyAmount`
+  * `tenure`
+  * `interestRate`
+  * `cashback`
+  * `label`
+  * `isPopular`
+  * `enabled`
+
+MongoDB was selected because its flexible document-based schema allows product variants and EMI plans to be embedded directly within a product document without requiring complex relational joins.
 
 ## API Endpoints
 
 ### `GET /api/health`
-Check API health.
+
+Checks whether the backend API is running successfully.
+
 **Example Response:**
+
 ```json
 {
   "success": true,
@@ -100,8 +134,11 @@ Check API health.
 ```
 
 ### `GET /api/products`
-Retrieve a list of all products (summary view).
+
+Retrieves a list of all products in summary format.
+
 **Example Response:**
+
 ```json
 {
   "success": true,
@@ -120,9 +157,17 @@ Retrieve a list of all products (summary view).
 ```
 
 ### `GET /api/products/:slug`
-Retrieve full product details including variants and EMI plans.
-**Example Request:** `/api/products/iphone-17-pro`
+
+Retrieves complete product information including variants and EMI plans.
+
+**Example Request:**
+
+```text
+/api/products/iphone-17-pro
+```
+
 **Example Response:**
+
 ```json
 {
   "success": true,
@@ -131,12 +176,14 @@ Retrieve full product details including variants and EMI plans.
     "name": "Apple iPhone 17 Pro",
     "slug": "iphone-17-pro",
     "price": 127400,
-    "variants": [...],
-    "emiPlans": [...]
+    "variants": [],
+    "emiPlans": []
   }
 }
 ```
+
 **Error Response:**
+
 ```json
 {
   "success": false,
@@ -144,69 +191,155 @@ Retrieve full product details including variants and EMI plans.
 }
 ```
 
-## Setup & Installation
+## Environment Variables
 
-### 1. Database Setup (MongoDB Atlas)
-1. Create a free cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
-2. Create a database user and whitelist your IP address.
-3. Get the connection string (URI).
+### Backend
 
-### 2. Environment Variables
-Create `.env` files in both `server/` and `client/` directories based on the `.env.example` provided.
+Create `server/.env` locally:
 
-**server/.env**
-```
+```env
 PORT=5000
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/1fi-store?retryWrites=true&w=majority
 CLIENT_URL=http://localhost:5173
 ```
 
-**client/.env**
+For the deployed Vercel backend, configure the environment variables in the Vercel project settings.
+
+```env
+MONGODB_URI=your_mongodb_atlas_connection_string
+CLIENT_URL=https://your-frontend.vercel.app
 ```
+
+`PORT` does not need to be manually configured for the Vercel deployment unless it is required by the application's local development setup.
+
+### Frontend
+
+Create `client/.env` locally:
+
+```env
 VITE_API_URL=http://localhost:5000
 ```
 
-### 3. Installation
-Install dependencies for both frontend and backend from the root directory:
+For the deployed Vercel frontend:
+
+```env
+VITE_API_URL=https://your-backend.vercel.app
+```
+
+The frontend uses `VITE_API_URL` to communicate with the deployed Express API.
+
+## Local Setup & Installation
+
+### 1. Database Setup
+
+Create a MongoDB Atlas cluster and configure:
+
+1. Create a MongoDB Atlas cluster.
+2. Create a database user.
+3. Configure network access.
+4. Obtain the MongoDB connection string.
+5. Add the connection string to `server/.env`.
+
+### 2. Install Dependencies
+
+From the project root:
+
 ```bash
 npm run install:all
 ```
 
-### 4. Database Seeding
-Seed the database with sample products and EMI data:
+### 3. Seed the Database
+
+Run:
+
 ```bash
 npm run seed
 ```
 
-### 5. Running the Application
-Start both the frontend and backend servers concurrently:
+This inserts the sample products, variants, and EMI plans into MongoDB.
+
+### 4. Run the Application
+
+Start the frontend and backend locally:
+
 ```bash
 npm run dev
 ```
-- Frontend will run on `http://localhost:5173`
-- Backend will run on `http://localhost:5000`
 
-## Deployment Instructions
+Local URLs:
 
-### Frontend (Vercel)
-1. Push your repository to GitHub.
-2. Go to Vercel and import the repository.
-3. Set the Framework Preset to **Vite**.
-4. Set the Root Directory to `client`.
-5. Add Environment Variable: `VITE_API_URL` (URL of your deployed backend).
-6. Deploy.
+```text
+Frontend: http://localhost:5173
+Backend:  http://localhost:5000
+```
 
-### Backend (Render / Railway)
-1. Import the repository in Render.
-2. Select **Web Service**.
-3. Set the Root Directory to `server`.
-4. Build Command: `npm install`
-5. Start Command: `node src/server.js`
-6. Add Environment Variables: `PORT=5000`, `MONGODB_URI` (your atlas URI), `CLIENT_URL` (your deployed Vercel URL).
-7. Deploy.
+## Deployment
 
-## Future Improvements
-- Implement a real authentication system.
-- Integrate a real payment gateway (Razorpay/Stripe).
-- Add an admin dashboard for inventory management.
-- Implement caching for product data.
+Both the frontend and backend are deployed using Vercel.
+
+### Frontend Deployment
+
+The React/Vite frontend is deployed as a separate Vercel project.
+
+Configuration:
+
+```text
+Framework Preset: Vite
+Root Directory: client
+```
+
+Environment variable:
+
+```text
+VITE_API_URL=https://your-backend.vercel.app
+```
+
+The frontend communicates with the deployed backend through the `VITE_API_URL` environment variable.
+
+### Backend Deployment
+
+The Express backend is deployed as a separate Vercel project.
+
+Configuration:
+
+```text
+Root Directory: server
+```
+
+The backend uses the Vercel configuration in `server/vercel.json` to route incoming requests to the Express application.
+
+Environment variables:
+
+```text
+MONGODB_URI=your_mongodb_atlas_connection_string
+CLIENT_URL=https://your-frontend.vercel.app
+```
+
+The deployed backend exposes the following endpoints:
+
+```text
+https://your-backend.vercel.app/api/health
+https://your-backend.vercel.app/api/products
+https://your-backend.vercel.app/api/products/:slug
+```
+
+## Deployment Architecture
+
+```text
+                    Internet
+                       |
+              +--------+--------+
+              |                 |
+              v                 v
+       Vercel Frontend    Vercel Backend
+       React + Vite       Node + Express
+              |                 |
+              | HTTP/REST API   |
+              +--------+--------+
+                       |
+                       v
+                 MongoDB Atlas
+```
+
+* Add automated testing for frontend and backend APIs.
+* Add proper production logging and monitoring.
