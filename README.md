@@ -1,6 +1,6 @@
 # 1Fi Assignment
 
-Live Demo: [https://1fi-rajneesh.vercel.app/]((https://1fi-rajneesh.vercel.app/))
+Live Demo: [https://1fi-rajneesh.vercel.app/](https://1fi-rajneesh.vercel.app/)
 
 Demo Video: [https://drive.google.com/file/d/1OhvFdN7iF0ynwGnM2wA9QCxUFU4J4Wxv/view?usp=sharing](https://drive.google.com/file/d/1OhvFdN7iF0ynwGnM2wA9QCxUFU4J4Wxv/view?usp=sharing)
 
