@@ -58,7 +58,7 @@ Architecture
        Vercel Frontend    Vercel Backend
        React + Vite       Node + Express
               |                 |
-              |   REST API      |
+              |    REST API     |
               +-------->--------+
                        |
                        v
@@ -136,33 +136,25 @@ label
 isPopular
 enabled
 
-Keeping variants and EMI plans inside the product document makes it straightforward to retrieve all information required for a product details page in a single API request.
+Keeping variants and EMI plans inside the product document makes it straightforward to retrieve all the information required for a product details page in a single API request.
 
 API Documentation
 Health Check
+GET /api/health
 
-GET
+Used to verify that the backend is running successfully.
 
-/api/health
-
-Used to verify that the backend is running.
-
-Example response:
-
+Example Response
 {
   "success": true,
   "message": "API is running successfully"
 }
 Get All Products
-
-GET
-
-/api/products
+GET /api/products
 
 Returns a list of products with summary information.
 
-Example response:
-
+Example Response
 {
   "success": true,
   "data": [
@@ -178,19 +170,13 @@ Example response:
   ]
 }
 Get Product by Slug
-
-GET
-
-/api/products/:slug
+GET /api/products/:slug
 
 Returns complete product information including variants and EMI plans.
 
-Example:
-
+Example Request
 /api/products/iphone-17-pro
-
-Example response:
-
+Example Response
 {
   "success": true,
   "data": {
@@ -202,6 +188,7 @@ Example response:
     "emiPlans": []
   }
 }
+Product Not Found
 
 If the requested product does not exist:
 
@@ -222,7 +209,7 @@ git clone https://github.com/RajneeshYadav-123/1Fi_Assignment.git
 cd 1Fi_Assignment
 2. Install Dependencies
 
-Install the dependencies for both frontend and backend:
+Install the dependencies for both the frontend and backend:
 
 npm run install:all
 3. Configure Environment Variables
@@ -274,7 +261,7 @@ Deployment
 
 The project is deployed using two separate Vercel projects.
 
-Frontend
+Frontend Deployment
 
 The React/Vite application is deployed on Vercel.
 
@@ -287,13 +274,15 @@ VITE_API_URL=https://frontend-ten-ochre-72.vercel.app
 
 This allows the deployed frontend to communicate with the production backend.
 
-Backend
+Live Frontend
+https://1fi-rajneesh.vercel.app/
+Backend Deployment
 
 The Express API is also deployed on Vercel.
 
 Root Directory: server
-Entry point: src/server.js
-Vercel configuration: server/vercel.json
+Entry Point: src/server.js
+Vercel Configuration: server/vercel.json
 
 The backend uses environment variables for the MongoDB connection and frontend origin.
 
@@ -304,25 +293,26 @@ Production API
 The deployed backend is available at:
 
 https://frontend-ten-ochre-72.vercel.app
-
-For example:
-
+Available Endpoints
+Health Check
 https://frontend-ten-ochre-72.vercel.app/api/health
+Get Products
 https://frontend-ten-ochre-72.vercel.app/api/products
+Get Product by Slug
 https://frontend-ten-ochre-72.vercel.app/api/products/:slug
 Deployment Architecture
-                    User
-                     |
-                     v
-          https://1fi-rajneesh.vercel.app
-                     |
-                     | REST API
-                     v
-     https://frontend-ten-ochre-72.vercel.app
-                     |
-                     | Mongoose
-                     v
-               MongoDB Atlas
+                         User
+                           |
+                           v
+              https://1fi-rajneesh.vercel.app
+                           |
+                           | REST API
+                           v
+       https://frontend-ten-ochre-72.vercel.app
+                           |
+                           | Mongoose
+                           v
+                     MongoDB Atlas
 Design & Implementation Notes
 
 The application follows a simple separation of concerns:
@@ -346,16 +336,19 @@ Add automated unit and integration tests.
 Add API validation and improved error handling.
 Add caching for frequently requested product data.
 Add production monitoring and structured logging.
-Links
+Project Links
+Live Application
 
-Live Application:
 https://1fi-rajneesh.vercel.app/
 
-Backend API:
+Backend API
+
 https://frontend-ten-ochre-72.vercel.app/api/products
 
-Demo Video:
+Demo Video
+
 https://drive.google.com/file/d/1OhvFdN7iF0ynwGnM2wA9QCxUFU4J4Wxv/view?usp=sharing
 
-GitHub Repository:
+GitHub Repository
+
 https://github.com/RajneeshYadav-123/1Fi_Assignment
